@@ -4,12 +4,16 @@ import {Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Join from './components/Join'
 import Login from './components/Login'
+import adminPage from './components/adminPage'
+
+
 function App() {
   return (
     <div className="App">
     <Switch>
       <Route path="/join" component={Join} />
       <Route path="/login" component={Login} />
+      <Route path="/adminPage" component={adminPage} />
       <Route path="/" component={Home} />
     </Switch>
     </div>
