@@ -38,6 +38,7 @@ export default class Login extends React.Component{
             if (data.errors) {
                 this.setState({errors: data.errors})
             } else {
+                console.log(data)
                 localStorage.setItem('adminToken', data.token)
                 this.props.history.push(`/adminPage/${data.admin.id}`)
             }
