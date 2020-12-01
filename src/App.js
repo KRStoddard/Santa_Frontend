@@ -13,7 +13,7 @@ function App() {
     <Switch>
       <Route path="/join" component={Join} />
       <Route path="/login" component={Login} />
-      <Route path="/adminPage" component={adminPage} />
+      <Route path="/adminPage/:id" component={adminPage} />
       <Route path="/" component={Home} />
     </Switch>
     </div>
