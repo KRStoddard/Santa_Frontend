@@ -121,3 +121,16 @@ a {
 .accountCreate:hover {
   cursor: pointer;
 }
+
+.notes {
+  width: 30%;
+  height: 4rem;
+  font-family: 'Mountains of Christmas', cursive;
+  text-align: center;
+}
+
+.notes:focus {
+  outline: none;
+}
+
+

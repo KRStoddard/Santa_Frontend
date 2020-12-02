@@ -5,7 +5,7 @@ import {API_ROOT, GET_HEADERS, GET_REQ} from '../constants/index'
 export default class adminPage extends React.Component{
 
     state = {
-        admin: {},
+        admin: null,
         loggedIn: true
     }
 
@@ -14,9 +14,7 @@ export default class adminPage extends React.Component{
         fetch(`${API_ROOT}/auto_login`, GET_REQ())
         .then(resp => resp.json())
         .then(data => {
-            
-                console.log(data)
-        
+            this.setState({admin: data})
         })
     }
 
@@ -30,15 +28,19 @@ export default class adminPage extends React.Component{
     }
 
     renderPage = () => {
+        const {events, id} = this.state.admin
+        return(
         <>
         <h2>Welcome, {this.state.admin.first_name}</h2>
-            <button>Create an Event</button>
+            <Link to={`/createEvent/${id}`}><button>Create an Event</button></Link>
                 <h1>My Events</h1>
-                {this.state.admin.events.length > 0 ? 
+                {events.length > 0 ? 
                     this.renderEvents()
                 :
-                    this.renderNoEvents()}
+                    this.renderNoEvents()
+                }
         </>
+        )
     }
 
     renderEvents = () => {
@@ -60,7 +62,10 @@ export default class adminPage extends React.Component{
                 <Link to="/"><h1 className="ss">❄❄❄ Secret Santa ❄❄❄</h1></Link>
             </div>
             <div className="options">
-                
+                {this.state.admin !== null ?
+                    this.renderPage()
+                :
+                    this.renderNotLogged()}
             </div>
             </div>
             </div>

@@ -5,6 +5,8 @@ import Home from './components/Home'
 import Join from './components/Join'
 import Login from './components/Login'
 import adminPage from './components/adminPage'
+import createEvent from './components/createEvent'
+import eventPage from './components/eventPage'
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Route path="/join" component={Join} />
       <Route path="/login" component={Login} />
       <Route path="/adminPage/:id" component={adminPage} />
+      <Route path="/createEvent/:id" component={createEvent} />
+      <Route path="/eventPage/:id" component={eventPage} />
       <Route path="/" component={Home} />
     </Switch>
     </div>
