@@ -52,6 +52,7 @@ code {
     font-size: 1.5rem;
     word-break: break-word;
   }
+  
 }
 
 .options {
@@ -70,6 +71,10 @@ button {
   margin-bottom: 1%;
 }
 
+.matchesButton {
+  width: 25%;
+}
+
 @media only screen and (max-width: 600px) {
   button {
     width: 40%;
@@ -79,6 +84,10 @@ button {
     font-size: 1.25rem;
     border: 1px solid rgb(79, 4, 8);
     border-radius:10px;
+  }
+
+  .matchesButton {
+    width: 75%;
   }
 }
 
@@ -132,5 +141,48 @@ a {
 .notes:focus {
   outline: none;
 }
+
+.event-code {
+  display: flex;
+}
+
+.event-code h2, .event-code h3 {
+  flex: 1;
+  justify-content: center;
+}
+
+.dates {
+  width: 50%;
+  display: flex;
+  margin-left: 25%;
+}
+
+.dates div {
+  flex: 1;
+}
+
+ol {  
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.people {
+  justify-content: center;
+  text-align: center;
+  width: 75%;
+  margin-left: 12.5%;
+  min-height: 50vh;
+}
+
+.people h3 {
+  text-decoration: underline;
+  overflow: auto;
+}
+
+.eventPage h4 {
+  text-decoration: underline;
+}
+
 
 
