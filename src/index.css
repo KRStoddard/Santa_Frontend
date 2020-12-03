@@ -185,5 +185,21 @@ ol {
   text-decoration: underline;
 }
 
+.logout {
+  width: 5%;
+  height: 2rem;
+  margin-left: 80%;
+}
+
+@media only screen and (max-width: 600px) {
+.logout {
+  width: 20%;
+  height: 2rem;
+  margin-left: 70%;
+}
+}
+
+
+
 
 

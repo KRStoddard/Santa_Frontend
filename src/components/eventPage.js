@@ -1,6 +1,7 @@
+import { nodeName } from 'jquery'
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { API_ROOT, GET_HEADERS, GET_REQ } from '../constants'
+import { API_ROOT, GET_HEADERS, GET_REQ, LOGOUT } from '../constants'
 
 export default class eventPage extends React.Component{
 
@@ -13,7 +14,10 @@ export default class eventPage extends React.Component{
         fetch(`${API_ROOT}/events/${this.props.match.params.id}`, GET_REQ())
         .then(resp => resp.json())
         .then(event => {
-            if (!event.users[0].match) {
+            if (event.message) {
+                this.props.history.push('/')
+            }
+             else if (event.users[0] && !event.users[0].match) {
             this.setState({event})
             } else {
                 this.setState({event: event, sent: true})
@@ -22,21 +26,16 @@ export default class eventPage extends React.Component{
     }
 
     renderUsers = () => {
-        if (this.state.event['users']) {
-            if (this.state.event.users.length > 0) {
-                if (this.state.event.users.length > 0) {
+            if (this.state.event['users'] && this.state.event.users.length > 0) {
                     return this.state.event.users.map(user => {
                         return <li>{user.first_name + ' ' + user.last_name}</li>
                     })
                 } else {
-                    return <li>No one has signed up yet!</li>
+                    return <li style={{listStyle: 'none'}}>No one has signed up yet!</li>
                 }
-            }
-        }
     }
 
     startMatch = () => {
-        console.log('hits start')
         const reqObj = {
             method: 'PATCH',
             headers: GET_HEADERS(),
@@ -50,7 +49,7 @@ export default class eventPage extends React.Component{
     }
 
     renderButton = () => {
-        if (this.state.sent === false) {
+        if (this.state.sent === false && this.state.event.users && this.state.event.users.length > 1) {
             return <button onClick={this.startMatch} className="matchesButton">Close Signups/Send out Matches!</button>
         } else {
             return <button onClick={this.endEvent} className="matchesButton">End Event</button>
@@ -58,7 +57,18 @@ export default class eventPage extends React.Component{
     }
 
     endEvent = () => {
-        console.log('end!')
+        const reqObj = {
+            method: 'DELETE',
+            headers: GET_HEADERS()
+        }
+
+        fetch(`${API_ROOT}/events/${this.state.event.code}`, reqObj)
+        .then(() => {this.props.history.push('/')})
+    }
+
+    logout = () => {
+        LOGOUT()
+        this.props.history.push('/')
     }
 
 
@@ -66,6 +76,7 @@ export default class eventPage extends React.Component{
         const {code, start, end, max_price, notes} = this.state.event
         return(
             <div className="screen">
+                <button onClick={this.logout} className="logout">Logout</button>
             <div className="pageBody">
             <div className="welcome">
                 <Link to="/"><h1 className="ss">❄❄❄ Secret Santa ❄❄❄</h1></Link>

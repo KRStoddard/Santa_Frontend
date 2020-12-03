@@ -14,3 +14,7 @@ export const GET_REQ = () => {
         headers: GET_HEADERS()}
     )
 }
+
+export const LOGOUT = () => {
+    localStorage.removeItem('admin_token')
+}

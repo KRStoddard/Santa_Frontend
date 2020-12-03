@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {API_ROOT, GET_HEADERS, GET_REQ} from '../constants/index'
+import {API_ROOT, GET_HEADERS, GET_REQ, LOGOUT} from '../constants/index'
 
 export default class adminPage extends React.Component{
 
     state = {
-        admin: null,
+        admin: {},
         loggedIn: true
     }
 
@@ -34,7 +34,7 @@ export default class adminPage extends React.Component{
         <h2>Welcome, {this.state.admin.first_name}</h2>
             <Link to={`/createEvent/${id}`}><button>Create an Event</button></Link>
                 <h1>My Events</h1>
-                {events.length > 0 ? 
+                {events ? 
                     this.renderEvents()
                 :
                     this.renderNoEvents()
@@ -44,8 +44,16 @@ export default class adminPage extends React.Component{
     }
 
     renderEvents = () => {
+        if (this.state.admin.events.length > 0 ) {
+            return this.renderSome()
+        } else {
+            return this.renderNoEvents()
+        }  
+    }
+
+    renderSome = () => {
         return this.state.admin.events.map(event => {
-            return <li>{event.code}</li>
+            return <Link to={`/eventPage/${event.code}`}><li>{event.code}</li></Link>
         })
     }
 
@@ -54,15 +62,22 @@ export default class adminPage extends React.Component{
             <p>You have no events yet.</p>
         )
     }
+
+    logout = () => {
+        LOGOUT()
+        this.props.history.push('/')
+    }
+
     render(){
         return(
             <div className="screen">
+                <button onClick={this.logout}className="logout">Logout</button>
             <div className="pageBody">
             <div className="welcome">
                 <Link to="/"><h1 className="ss">❄❄❄ Secret Santa ❄❄❄</h1></Link>
             </div>
             <div className="options">
-                {this.state.admin !== null ?
+                {this.state.admin.id ?
                     this.renderPage()
                 :
                     this.renderNotLogged()}
