@@ -199,6 +199,17 @@ ol {
 }
 }
 
+textarea:focus {
+  outline: none;
+}
+
+textarea {
+  width: 30%;
+  height: 4rem;
+  font-family: 'Mountains of Christmas', cursive;
+  text-align: center;
+}
+
 
 
 

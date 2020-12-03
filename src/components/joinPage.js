@@ -17,11 +17,11 @@ export default class joinPage extends React.Component{
 
     submitForm = e => {
         e.preventDefault()
-        const {first_name, last_name, email} = e.target
+        const {first_name, last_name, email, ideas} = e.target
         const reqObj = {
             method: 'POST',
             headers: GET_HEADERS(),
-            body: JSON.stringify({users: {first_name: first_name.value, last_name: last_name.value, email: email.value, event_id: this.state.event.id}})
+            body: JSON.stringify({users: {first_name: first_name.value, last_name: last_name.value, email: email.value, ideas: ideas.value, event_id: this.state.event.id}})
         }
 
         fetch(`${API_ROOT}/users`, reqObj)
@@ -75,17 +75,18 @@ export default class joinPage extends React.Component{
                 {notes ? 
                     <>
                     <h4>Additional Notes</h4>
-                    <p>{notes}</p>
+                    <p>{notes}</p>  
                     </>
                 :
                     null}
             </div>
-            <form onSubmit={this.submitForm}>
+            <form onKeyDown={(e) => { if (e.key === 13 && e.target.type !== 'textarea') {e.preventDefault()}}} onSubmit={this.submitForm}>
                 <h2>Please Fill Out Information* to Join Event</h2>
                 <p>{this.state.errors}</p>
                 <input type="text" name="first_name" placeholder="First Name" />
                 <input type="text" name="last_name" placeholder="Last Name" /><br></br>
                 <input type="email" name="email" placeholder="Email" /><br></br>
+                <textarea rows={7} name="ideas" placeholder={"Gift Ideas"}></textarea><br></br>
                 <button type="submit">Submit</button>
             </form>
             <p>*Your first and last name will be shared with the group admin and your secret santa. Your email will not. Please use a valid email; it is how we send you your match's name.</p>

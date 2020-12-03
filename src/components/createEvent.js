@@ -9,13 +9,14 @@ export default class createEvent extends React.Component{
     state = {
         checked: false,
         errors: "",
-        logged_in: false
+        logged_in: false,
+        ideas: ""
     }
 
     submitForm = e => {
         e.preventDefault()
         const {start, end, max_price, notes} = e.target
-        let body = {admin_id: this.props.match.params.id, start: start.value, end: end.value, max_price: max_price.value, notes: notes.value}
+        let body = {admin_id: this.props.match.params.id, start: start.value, end: end.value, max_price: max_price.value, notes: notes.value, ideas: this.state.ideas}
         if (this.state.checked === true) {
             body['add'] = this.state.checked
         }
@@ -63,8 +64,22 @@ export default class createEvent extends React.Component{
                 $<input type="number" name="max_price" /><br></br>
                 <textarea className="notes" name="notes" placeholder="Any Additional Notes for Participants" /><br></br>
                 <Checkbox onChange={() => this.setState({checked: !this.state.checked})} color="danger" name="add" /><label>Check if you are also a participant in the event</label><br></br><br></br>
+                {this.state.checked ?
+                    this.renderExtraFields()
+                :
+                    null
+                }
                 <button type="submit">Create</button>
             </form>
+        )
+    }
+
+    renderExtraFields = () => {
+        return(
+        <>
+        <h3>What are some gift ideas for yourself?</h3>
+        <textarea onChange={e => this.setState({ideas: e.target.value})} rows={7} name="ideas" placeholder={"Gift Ideas"}></textarea><br></br>
+        </>
         )
     }
 
@@ -91,6 +106,7 @@ export default class createEvent extends React.Component{
                 :
                     this.renderLogin()
                 }
+                
             </div>
             </div>
             </div>
