@@ -1,26 +1,30 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { API_ROOT, GET_REQ } from '../constants'
+import { API_ROOT, GET_HEADERS, GET_REQ } from '../constants'
 
 export default class eventPage extends React.Component{
 
     state = {
-        event: {}
+        event: {},
+        sent: false
     }
 
     componentDidMount(){
         fetch(`${API_ROOT}/events/${this.props.match.params.id}`, GET_REQ())
         .then(resp => resp.json())
-        .then(event => this.setState({event}))
+        .then(event => {
+            if (!event.users[0].match) {
+            this.setState({event})
+            } else {
+                this.setState({event: event, sent: true})
+            }
+        })
     }
 
     renderUsers = () => {
-        console.log(this.state.event['users'])
         if (this.state.event['users']) {
             if (this.state.event.users.length > 0) {
-                console.log('hit first if')
                 if (this.state.event.users.length > 0) {
-                    console.log('hit second if')
                     return this.state.event.users.map(user => {
                         return <li>{user.first_name + ' ' + user.last_name}</li>
                     })
@@ -30,6 +34,33 @@ export default class eventPage extends React.Component{
             }
         }
     }
+
+    startMatch = () => {
+        console.log('hits start')
+        const reqObj = {
+            method: 'PATCH',
+            headers: GET_HEADERS(),
+        }
+
+        fetch(`${API_ROOT}/events/${this.state.event.code}`, reqObj)
+        .then(() => {
+            alert('Emails with Secret Santa matches have been sent out!')
+            this.setState({sent: true})
+        })
+    }
+
+    renderButton = () => {
+        if (this.state.sent === false) {
+            return <button onClick={this.startMatch} className="matchesButton">Close Signups/Send out Matches!</button>
+        } else {
+            return <button onClick={this.endEvent} className="matchesButton">End Event</button>
+        }
+    }
+
+    endEvent = () => {
+        console.log('end!')
+    }
+
 
     render(){
         const {code, start, end, max_price, notes} = this.state.event
@@ -43,7 +74,7 @@ export default class eventPage extends React.Component{
                 <div className="event-code">
                     <h2>Event Code: {code}</h2>
                 </div>
-                <button className="matchesButton">Close Signups/Send out Matches!</button>
+                {this.renderButton()}
                 <div className="dates">
                         {start ? 
                             <div>

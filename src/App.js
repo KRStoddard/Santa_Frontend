@@ -7,12 +7,14 @@ import Login from './components/Login'
 import adminPage from './components/adminPage'
 import createEvent from './components/createEvent'
 import eventPage from './components/eventPage'
+import joinPage from './components/joinPage';
 
 
 function App() {
   return (
     <div className="App">
     <Switch>
+      <Route path="/joinPage/:id" component={joinPage} />
       <Route path="/join" component={Join} />
       <Route path="/login" component={Login} />
       <Route path="/adminPage/:id" component={adminPage} />
