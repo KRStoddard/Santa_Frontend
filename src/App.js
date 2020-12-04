@@ -8,6 +8,7 @@ import adminPage from './components/adminPage'
 import createEvent from './components/createEvent'
 import eventPage from './components/eventPage'
 import joinPage from './components/joinPage';
+import About from './components/About';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="/adminPage/:id" component={adminPage} />
       <Route path="/createEvent/:id" component={createEvent} />
       <Route path="/eventPage/:id" component={eventPage} />
+      <Route path="/about" component={About} />
       <Route path="/" component={Home} />
     </Switch>
     </div>

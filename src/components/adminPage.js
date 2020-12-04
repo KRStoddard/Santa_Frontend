@@ -72,6 +72,7 @@ export default class adminPage extends React.Component{
     render(){
         return(
             <div className="screen">
+                <div className="snowfall">
                 <button onClick={this.logout}className="logout">Logout</button>
             <div className="pageBody">
             <div className="welcome">
@@ -82,6 +83,7 @@ export default class adminPage extends React.Component{
                     this.renderPage()
                 :
                     this.renderNotLogged()}
+            </div>
             </div>
             </div>
             </div>

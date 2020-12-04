@@ -9,6 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
+  
 }
 
 code {
@@ -18,9 +19,15 @@ code {
 
 .screen {
   color: white;
-  background-image: linear-gradient(rgb(92, 8, 11), rgb(92, 8, 11), rgb(92, 8, 11), rgb(92, 8, 11), white);
+  background: linear-gradient(rgb(92, 8, 11), rgb(92, 8, 11),  rgb(92, 8, 11), rgb(92, 8, 11), white);  
   font-family: 'Mountains of Christmas', cursive;
   height: 100vh; 
+}
+
+.snowfall {
+  background-image: url('snowfall.gif');
+  height: 100vh;
+  background-repeat: repeat-x;
 }
 
 .pageBody {
@@ -44,6 +51,9 @@ code {
     font-size: 2rem;
     word-break: break-word;
   }
+  .snowfall {
+    background-size: cover;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -52,7 +62,9 @@ code {
     font-size: 1.5rem;
     word-break: break-word;
   }
-  
+  .snowfall {
+    background-size: cover;
+  }
 }
 
 .options {

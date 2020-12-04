@@ -108,6 +108,7 @@ export default class Login extends React.Component{
     render(){
         return(
             <div className="screen">
+                <div className="snowfall">
             <div className="pageBody">
             <div className="welcome">
                 <Link to="/"><h1 className="ss">❄❄❄ Secret Santa ❄❄❄</h1></Link>
@@ -118,6 +119,7 @@ export default class Login extends React.Component{
                 this.loginRender()
                 :
                 this.createRender()}
+            </div>
             </div>
             </div>
             </div>

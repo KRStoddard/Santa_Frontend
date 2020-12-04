@@ -29,6 +29,7 @@ export default class Join extends React.Component{
     render(){
         return(
             <div className="screen">
+                <div className="snowfall">
             <div className="pageBody">
             <div className="welcome">
                 <Link to="/"><h1 className="ss">❄❄❄ Secret Santa ❄❄❄</h1></Link>
@@ -40,6 +41,7 @@ export default class Join extends React.Component{
                 <input name="code" type="text" /><br></br>
                 <button type="submit">Join</button>
                 </form>
+            </div>
             </div>
             </div>
             </div>

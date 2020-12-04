@@ -105,6 +105,7 @@ export default class createEvent extends React.Component{
     render(){
         return(
             <div className="screen">
+                <div className="snowfall">
                 <button onClick={this.logout} className="logout">Logout</button>
             <div className="pageBody">
             <div className="welcome">
@@ -117,6 +118,7 @@ export default class createEvent extends React.Component{
                     this.renderLogin()
                 }
                 
+            </div>
             </div>
             </div>
             </div>

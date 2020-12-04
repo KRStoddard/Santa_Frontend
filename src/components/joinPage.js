@@ -62,6 +62,7 @@ export default class joinPage extends React.Component{
         const {code, start, end, max_price, notes} = this.state.event
         return(
             <div className="screen">
+                <div className="snowfall">
             <div className="pageBody">
             <div className="welcome">
                 <h2>Welcome to</h2>
@@ -106,6 +107,7 @@ export default class joinPage extends React.Component{
                         this.renderForm()
                     :
                         <p>We're sorry, the signups for this event has been closed by the admin.</p>}
+            </div>
             </div>
             </div>
         )

@@ -34,6 +34,8 @@ export default class Home extends React.Component{
     render(){
         return(
             <div className="screen">
+                <div className="snowfall">
+                <Link to="/about"><button className="logout">About</button></Link>
             <div className="pageBody">
             <div className="welcome">
                 <h2>Welcome to</h2>
@@ -45,6 +47,7 @@ export default class Home extends React.Component{
                 <h2>or</h2>
                 {this.renderButton()}
                 <h2>To Start/Manage An Event</h2>
+            </div>
             </div>
             </div>
             </div>

@@ -91,6 +91,7 @@ export default class eventPage extends React.Component{
         const {code, start, end, max_price, notes} = this.state.event
         return(
             <div className="screen">
+                <div className="snowfall">
                 <button onClick={this.logout} className="logout">Logout</button>
             <div className="pageBody">
             <div className="welcome">
@@ -141,6 +142,7 @@ export default class eventPage extends React.Component{
                 <ol>
                 {this.renderUsers()}
                 </ol>
+            </div>
             </div>
             </div>
             </div>
