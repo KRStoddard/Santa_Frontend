@@ -2,13 +2,16 @@ import { nodeName } from 'jquery'
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { API_ROOT, GET_HEADERS, GET_REQ, LOGOUT } from '../constants'
+import { css } from "@emotion/core";
+import CircleLoader from "react-spinners/ClipLoader"
 
 export default class eventPage extends React.Component{
 
     //state for class component
     state = {
         event: {},
-        sent: false
+        sent: false,
+        loading: false
     }
 
     //loads page or sends user back to homepage if not logged in
@@ -41,6 +44,7 @@ export default class eventPage extends React.Component{
     //starts backend process of matching a user to their Secret Santa giftee and
     //sends out the email letting them know
     startMatch = () => {
+        this.setState({loading: true})
         const reqObj = {
             method: 'PATCH',
             headers: GET_HEADERS(),
@@ -48,6 +52,7 @@ export default class eventPage extends React.Component{
 
         fetch(`${API_ROOT}/events/${this.state.event.code}`, reqObj)
         .then(() => {
+            this.setState({loading: false})
             alert('Emails with Secret Santa matches have been sent out!')
             this.setState({sent: true})
         })
@@ -90,6 +95,10 @@ export default class eventPage extends React.Component{
             <div className="pageBody">
             <div className="welcome">
                 <Link to="/"><h1 className="ss">❄❄❄ Secret Santa ❄❄❄</h1></Link>
+                <CircleLoader
+                    color={"white"}
+                    loading={this.state.loading}
+                />
             </div>
             <div className="options eventPage">
                 <div className="event-code">

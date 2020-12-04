@@ -71,6 +71,10 @@ button {
   margin-bottom: 1%;
 }
 
+button:focus {
+  outline: none;
+}
+
 .matchesButton {
   width: 25%;
 }
@@ -214,6 +218,8 @@ textarea {
   list-style: none;
   font-size: 1.25rem;
 }
+
+
 
 
 

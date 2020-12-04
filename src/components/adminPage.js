@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {API_ROOT, GET_HEADERS, GET_REQ, LOGOUT} from '../constants/index'
 
+
 export default class adminPage extends React.Component{
 
     //state for class component
