@@ -4,10 +4,13 @@ import { API_ROOT, GET_REQ } from '../constants'
 
 export default class Join extends React.Component{
 
+    //state for component class basically just here for error handling
     state = {
         error: ""
     }
 
+    //if code belongs to a group, it sends user along to next page
+    //or lets them know they've entered an invalid code
     submitJoin = e => {
         e.preventDefault()
 
@@ -22,6 +25,7 @@ export default class Join extends React.Component{
         })
     }
 
+    //renders page
     render(){
         return(
             <div className="screen">

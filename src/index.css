@@ -210,6 +210,11 @@ textarea {
   text-align: center;
 }
 
+.event-links {
+  list-style: none;
+  font-size: 1.25rem;
+}
+
 
 
 

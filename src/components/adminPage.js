@@ -4,11 +4,13 @@ import {API_ROOT, GET_HEADERS, GET_REQ, LOGOUT} from '../constants/index'
 
 export default class adminPage extends React.Component{
 
+    //state for class component
     state = {
         admin: {},
         loggedIn: true
     }
 
+    //checks to make sure admin is logged in
     componentDidMount(){
         const id = this.props.match.params.id
         fetch(`${API_ROOT}/auto_login`, GET_REQ())
@@ -18,6 +20,7 @@ export default class adminPage extends React.Component{
         })
     }
 
+    //Prompts user to login if they are not
     renderNotLogged = () => {
         return(
             <>
@@ -27,6 +30,7 @@ export default class adminPage extends React.Component{
         )
     }
 
+    //changes how page displays based on whether or not the user has events
     renderPage = () => {
         const {events, id} = this.state.admin
         return(
@@ -34,7 +38,7 @@ export default class adminPage extends React.Component{
         <h2>Welcome, {this.state.admin.first_name}</h2>
             <Link to={`/createEvent/${id}`}><button>Create an Event</button></Link>
                 <h1>My Events</h1>
-                {events ? 
+                {events && events.length > 0 ? 
                     this.renderEvents()
                 :
                     this.renderNoEvents()
@@ -43,31 +47,27 @@ export default class adminPage extends React.Component{
         )
     }
 
+    //renders list of events if the user has them
     renderEvents = () => {
-        if (this.state.admin.events.length > 0 ) {
-            return this.renderSome()
-        } else {
-            return this.renderNoEvents()
-        }  
-    }
-
-    renderSome = () => {
         return this.state.admin.events.map(event => {
-            return <Link to={`/eventPage/${event.code}`}><li>{event.code}</li></Link>
+            return <Link to={`/eventPage/${event.code}`}><li className="event-links">- {event.code} -</li></Link>
         })
     }
 
+    //tells the user they have no events yet if they don't
     renderNoEvents = () => {
         return(
             <p>You have no events yet.</p>
         )
     }
 
+    //logs out the user, clearing the JWT token
     logout = () => {
         LOGOUT()
         this.props.history.push('/')
     }
 
+    //renders page
     render(){
         return(
             <div className="screen">

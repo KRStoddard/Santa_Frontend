@@ -6,6 +6,7 @@ import { API_ROOT, GET_HEADERS, GET_REQ, LOGOUT } from '../constants'
 
 export default class createEvent extends React.Component{
 
+    //state for class component
     state = {
         checked: false,
         errors: "",
@@ -13,6 +14,7 @@ export default class createEvent extends React.Component{
         ideas: ""
     }
 
+    //submits form and creates new event
     submitForm = e => {
         e.preventDefault()
         const {start, end, max_price, notes} = e.target
@@ -36,11 +38,13 @@ export default class createEvent extends React.Component{
         })
     }
 
+    //logs user out and clears JWT token
     logout = () => {
         LOGOUT()
         this.props.history.push('/')
     }
 
+    //checks to make sure an admin is logged in
     componentDidMount(){
         fetch(`${API_ROOT}/auto_login`, GET_REQ())
         .then(resp => resp.json())
@@ -51,6 +55,7 @@ export default class createEvent extends React.Component{
         })
     }
 
+    //renders page if called
     renderPage = () => {
         return (
             <form onSubmit={this.submitForm}>
@@ -74,6 +79,9 @@ export default class createEvent extends React.Component{
         )
     }
 
+    //if admin wishes to be a part of the event, this loads to enter the only
+    //information not included in their admin profile
+
     renderExtraFields = () => {
         return(
         <>
@@ -83,6 +91,7 @@ export default class createEvent extends React.Component{
         )
     }
 
+    //if admin is not logged in, it will prompt them to do so
     renderLogin = () => {
         return(
             <>
@@ -92,6 +101,7 @@ export default class createEvent extends React.Component{
         ) 
     }
 
+    //renders page
     render(){
         return(
             <div className="screen">

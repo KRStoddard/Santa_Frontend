@@ -4,9 +4,12 @@ import { API_ROOT, GET_REQ } from '../constants'
 
 export default class Home extends React.Component{
 
+    //state for component class
     state = {
         admin: ""
     }
+
+    //checks whether user is a logged-in admin
     componentDidMount(){
         fetch(`${API_ROOT}/auto_login`, GET_REQ())
         .then(resp => resp.json())
@@ -17,6 +20,7 @@ export default class Home extends React.Component{
         })
     }
 
+    //renders button based on whether the user is a logged-in admin
     renderButton = () => {
         if (!this.state.admin.id) {
             return <Link to="/login"><button>Login</button></Link> 
@@ -25,6 +29,8 @@ export default class Home extends React.Component{
         }
         
     }
+
+    //renders page
     render(){
         return(
             <div className="screen">

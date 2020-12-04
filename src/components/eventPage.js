@@ -5,11 +5,13 @@ import { API_ROOT, GET_HEADERS, GET_REQ, LOGOUT } from '../constants'
 
 export default class eventPage extends React.Component{
 
+    //state for class component
     state = {
         event: {},
         sent: false
     }
 
+    //loads page or sends user back to homepage if not logged in
     componentDidMount(){
         fetch(`${API_ROOT}/events/${this.props.match.params.id}`, GET_REQ())
         .then(resp => resp.json())
@@ -25,6 +27,7 @@ export default class eventPage extends React.Component{
         })
     }
 
+    //renders list of users signed up for event or tells admin there aren't any yet
     renderUsers = () => {
             if (this.state.event['users'] && this.state.event.users.length > 0) {
                     return this.state.event.users.map(user => {
@@ -35,6 +38,8 @@ export default class eventPage extends React.Component{
                 }
     }
 
+    //starts backend process of matching a user to their Secret Santa giftee and
+    //sends out the email letting them know
     startMatch = () => {
         const reqObj = {
             method: 'PATCH',
@@ -48,6 +53,9 @@ export default class eventPage extends React.Component{
         })
     }
 
+    //renders button based on whether or not matches have already been made
+    //and whether matches can be made (if there is only one person signed up
+    //the option available is to end the event, not match a single person to themself)
     renderButton = () => {
         if (this.state.sent === false && this.state.event.users && this.state.event.users.length > 1) {
             return <button onClick={this.startMatch} className="matchesButton">Close Signups/Send out Matches!</button>
@@ -56,6 +64,7 @@ export default class eventPage extends React.Component{
         }
     }
 
+    //ends the event and deletes the information from the backend
     endEvent = () => {
         const reqObj = {
             method: 'DELETE',
@@ -66,12 +75,13 @@ export default class eventPage extends React.Component{
         .then(() => {this.props.history.push('/')})
     }
 
+    //logs out the admin and removes the JWT token
     logout = () => {
         LOGOUT()
         this.props.history.push('/')
     }
 
-
+    //renders the page
     render(){
         const {code, start, end, max_price, notes} = this.state.event
         return(

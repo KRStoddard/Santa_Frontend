@@ -4,11 +4,13 @@ import {API_ROOT, GET_HEADERS} from '../constants/index'
 
 export default class Login extends React.Component{
 
+    //state for component class
     state = {
         type: 'login',
         errors: " "
     }
 
+    //if user needs to login, it renders this
     loginRender = () => {
         return(
             <>
@@ -24,6 +26,7 @@ export default class Login extends React.Component{
         )
     }
 
+    //handles the submission of a login event
     loginSubmit = e => {
         e.preventDefault()
         const {email, password} = e.target
@@ -44,6 +47,7 @@ export default class Login extends React.Component{
         })
     }
 
+    //this renders if user needs to create an account
     createRender = () => {
         return(
         <>
@@ -60,6 +64,7 @@ export default class Login extends React.Component{
         )
     }
 
+    //sends information to be sent to backend if the passwords they entered match
     submitForm = e => {
         e.preventDefault()
         const {first_name, last_name, email, password, confirm} = e.target
@@ -70,6 +75,7 @@ export default class Login extends React.Component{
         }
     }
 
+    //this actually sends the information for new account to be made
     sendFetch = (first_name, last_name, email, password) => {
         const reqObj = {
             method: 'POST',
@@ -89,6 +95,7 @@ export default class Login extends React.Component{
         })
     }
 
+    //renders errors
     renderErrors = () => {
         return(
         <>
@@ -97,6 +104,7 @@ export default class Login extends React.Component{
         )
     }
 
+    //renders page
     render(){
         return(
             <div className="screen">
