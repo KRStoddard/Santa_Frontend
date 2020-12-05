@@ -110,7 +110,7 @@ export default class joinPage extends React.Component{
                 :
                     null}
             </div>
-                    {this.state.event['users'] && this.state.event.users.length === 0 || this.state.event.users[0] && !this.state.event.users[0].match ?
+                    {this.state.event['users'] && this.state.event.users.length === 0 || this.state.event.users.length > 0 && this.state.event.users[0] && !this.state.event.users[0].match ?
                         this.renderForm()
                     :
                         <p>We're sorry, the signups for this event has been closed by the admin.</p>}
