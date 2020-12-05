@@ -57,9 +57,17 @@ export default class joinPage extends React.Component{
             </>
         )
             } else if (this.state.event.users.length === 0) {
-                return (<p>*Your first and last name will be shared with the group admin and your secret santa. Your email will not. Please use a valid email; it is how we send you your match's name.</p>)
+                return (
+                    <>
+                        <p>*Your first and last name will be shared with the group admin and your secret santa. Your email will not. Please use a valid email; it is how we send you your match's name.</p>
+                    </>
+                )
             } else {
-                return (<p>*Your first and last name will be shared with the group admin and your secret santa. Your email will not. Please use a valid email; it is how we send you your match's name.</p>)
+                return (
+                    <>
+                        <p>*Your first and last name will be shared with the group admin and your secret santa. Your email will not. Please use a valid email; it is how we send you your match's name.</p>
+                    </>
+                    )
             }
         }
     }
