@@ -1,4 +1,4 @@
-export const API_ROOT = "http://localhost:3001"
+export const API_ROOT = "https://secret-santa-builder-backend.herokuapp.com"
 
 export const GET_HEADERS = () => {
     let token = localStorage.getItem('admin_token')
